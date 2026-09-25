@@ -1538,8 +1538,45 @@ function createConfetti() {
 
     const animation =
       piece.animate(
-
         [
           {
             transform:
-              "translateY(0) rotate(0deg
+              "translateY(0) rotate(0deg)",
+            opacity: 1
+          },
+          {
+            transform:
+              "translateY(110vh) rotate(360deg)",
+            opacity: 0
+          }
+        ],
+        {
+          duration: 2500 + Math.random() * 2000,
+          easing: "linear"
+        }
+      );
+
+    animation.onfinish =
+      function() {
+        piece.remove();
+      };
+
+  }
+}
+
+
+/* =========================
+   START
+========================= */
+
+showPage(0);
+
+
+/* =========================
+   CLOSE SCRIPT
+========================= */
+
+</script>
+
+</body>
+</html>
