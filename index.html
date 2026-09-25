@@ -1,1582 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Varsha - Kuchi-puchi ❤️</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Varsha - kuchi-puchi ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;800&family=Great+Vibes&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <style>
-
-/* =========================
-   BASIC RESET
-========================= */
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(255,77,109,.12),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(142,45,226,.15),
-      transparent 35%
-    ),
-    #100718;
-
-  color: white;
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-}
-
-
-/* =========================
-   BACKGROUND ORBS
-========================= */
-
-.orb {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(60px);
-  opacity: .28;
-  pointer-events: none;
-  animation: float 10s ease-in-out infinite alternate;
-}
-
-.o1 {
-  width: 450px;
-  height: 450px;
-  background: #ff4d6d;
-  top: -180px;
-  left: -180px;
-}
-
-.o2 {
-  width: 380px;
-  height: 380px;
-  background: #8e2de2;
-  right: -150px;
-  bottom: -130px;
-  animation-delay: 2s;
-}
-
-.o3 {
-  width: 300px;
-  height: 300px;
-  background: #ff758c;
-  left: 40%;
-  bottom: -180px;
-  animation-delay: 4s;
-}
-
-@keyframes float {
-
-  from {
-    transform: translate(0,0);
-  }
-
-  to {
-    transform: translate(30px,-25px);
-  }
-
-}
-
-
-/* =========================
-   TOP BUTTONS
-========================= */
-
-.topBar {
-  position: fixed;
-
-  top: 18px;
-  left: 18px;
-  right: 18px;
-
-  display: flex;
-  justify-content: space-between;
-
-  z-index: 1000;
-}
-
-.iconBtn {
-  width: 45px;
-  height: 45px;
-
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 50%;
-
-  background: rgba(255,255,255,.08);
-
-  color: white;
-
-  font-size: 20px;
-
-  cursor: pointer;
-
-  backdrop-filter: blur(10px);
-
-  transition: .3s;
-}
-
-.iconBtn:hover {
-  transform: scale(1.1);
-  background: rgba(255,255,255,.15);
-}
-
-
-/* =========================
-   PAGES
-========================= */
-
-.page {
-  position: absolute;
-
-  inset: 0;
-
-  padding: 25px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* IMPORTANT:
-     First page is visible by default */
-  opacity: 1;
-  visibility: visible;
-
-  transform: translateX(0) scale(1);
-
-  transition:
-    opacity .6s ease,
-    transform .6s ease,
-    visibility .6s;
-}
-
-/* Hide only pages that are NOT active */
-
-.page:not(.active) {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateX(40px) scale(.97);
-}
-
-
-/* =========================
-   CARD
-========================= */
-
-.card {
-  width: 100%;
-
-  max-width: 440px;
-
-  max-height: calc(100vh - 50px);
-
-  padding: 28px 26px;
-
-  text-align: center;
-
-  border: 1px solid rgba(255,255,255,.16);
-
-  border-radius: 36px;
-
-  background: rgba(255,255,255,.075);
-
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-
-  box-shadow:
-    0 25px 70px rgba(0,0,0,.45),
-    inset 0 1px 0 rgba(255,255,255,.1);
-
-  overflow-y: auto;
-
-  scrollbar-width: none;
-}
-
-.card::-webkit-scrollbar {
-  display: none;
-}
-
-
-/* =========================
-   HEADINGS
-========================= */
-
-h1 {
-  font-family: 'Playfair Display', serif;
-
-  font-size: 3.7rem;
-
-  line-height: 1;
-
-  margin-bottom: 6px;
-
-  background:
-    linear-gradient(
-      120deg,
-      #fff,
-      #ffb3c1,
-      #ff4d6d
-    );
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-h2 {
-  font-size: .65rem;
-
-  letter-spacing: 4px;
-
-  text-transform: uppercase;
-
-  color: #ff9fb1;
-
-  margin-bottom: 10px;
-}
-
-
-/* =========================
-   PHOTOS
-========================= */
-
-.photoBox {
-  position: relative;
-
-  width: 200px;
-  height: 200px;
-
-  margin: 16px auto 20px;
-}
-
-.photoBox img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-
-  border-radius: 30px;
-
-  border: 4px solid rgba(255,255,255,.2);
-
-  box-shadow:
-    0 20px 45px rgba(0,0,0,.55),
-    0 0 35px rgba(255,77,109,.28);
-
-  transition: .5s;
-}
-
-.photoBox img:hover {
-  transform: scale(1.035) rotate(1deg);
-}
-
-
-/* HEART ON PHOTO */
-
-.photoBox::after {
-  content: "❤️";
-
-  position: absolute;
-
-  top: -10px;
-  right: -10px;
-
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  background: rgba(255,77,109,.9);
-
-  border-radius: 50%;
-
-  font-size: 18px;
-
-  box-shadow:
-    0 8px 20px rgba(255,77,109,.35);
-}
-
-
-/* =========================
-   THOUGHT TEXT
-========================= */
-
-.thought {
-  font-family: 'Caveat', cursive;
-
-  font-size: 1.38rem;
-
-  line-height: 1.45;
-
-  color: #fff5f7;
-}
-
-
-/* =========================
-   TAGS
-========================= */
-
-.tags {
-  margin-top: 10px;
-}
-
-.tag {
-  display: inline-block;
-
-  padding: 6px 12px;
-
-  margin: 4px;
-
-  border-radius: 20px;
-
-  background: rgba(255,255,255,.08);
-
-  border: 1px solid rgba(255,255,255,.12);
-
-  font-size: .78rem;
-}
-
-
-/* =========================
-   BUTTON
-========================= */
-
-.btn {
-  margin-top: 18px;
-
-  padding: 13px 30px;
-
-  border: none;
-
-  border-radius: 30px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff4d6d,
-      #c9184a
-    );
-
-  color: white;
-
-  font-family: 'Poppins', sans-serif;
-
-  font-weight: 600;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 10px 25px rgba(255,77,109,.3);
-
-  transition: .3s;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-
-  box-shadow:
-    0 15px 35px rgba(255,77,109,.45);
-}
-
-
-/* =========================
-   GIFT
-========================= */
-
-.gift {
-  font-size: 85px;
-
-  margin: 5px 0;
-
-  animation:
-    giftBounce 2s ease-in-out infinite;
-}
-
-@keyframes giftBounce {
-
-  0%,100% {
-    transform:
-      translateY(0)
-      rotate(0);
-  }
-
-  50% {
-    transform:
-      translateY(-10px)
-      rotate(3deg);
-  }
-
-}
-
-
-/* =========================
-   DOTS
-========================= */
-
-.dots {
-  position: fixed;
-
-  bottom: 15px;
-
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  display: flex;
-
-  gap: 6px;
-
-  padding: 8px 13px;
-
-  border-radius: 30px;
-
-  background: rgba(0,0,0,.25);
-
-  backdrop-filter: blur(10px);
-
-  z-index: 1000;
-}
-
-.dot {
-  width: 20px;
-  height: 5px;
-
-  border-radius: 10px;
-
-  background: rgba(255,255,255,.25);
-
-  cursor: pointer;
-
-  transition: .35s;
-}
-
-.dot.on {
-  width: 34px;
-
-  background: #ff4d6d;
-}
-
-
-/* =========================
-   LAST PAGE
-========================= */
-
-.lastPage .photoBox {
-  margin-bottom: 12px;
-}
-
-.lastPage .thought {
-  font-size: 1.25rem;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-  .page {
-    padding: 10px;
-
-    align-items: center;
-
-    overflow-y: auto;
-  }
-
-  .card {
-    width: 100%;
-
-    max-width: 390px;
-
-    max-height: calc(100vh - 20px);
-
-    padding: 22px 17px 25px;
-
-    border-radius: 30px;
-
-    overflow-y: auto;
-
-    scrollbar-width: none;
-  }
-
-  .card::-webkit-scrollbar {
-    display: none;
-  }
-
-  h1 {
-    font-size: 3.15rem;
-
-    line-height: 1;
-
-    margin-bottom: 4px;
-  }
-
-  h2 {
-    font-size: .58rem;
-
-    letter-spacing: 3px;
-
-    margin-bottom: 8px;
-  }
-
-  .photoBox {
-    width: 175px;
-    height: 175px;
-
-    margin: 12px auto 16px;
-  }
-
-  .photoBox img {
-    border-radius: 24px;
-
-    border-width: 3px;
-
-    box-shadow:
-      0 15px 35px rgba(0,0,0,.55),
-      0 0 25px rgba(255,77,109,.35);
-  }
-
-  .photoBox::after {
-    width: 32px;
-    height: 32px;
-
-    font-size: 16px;
-
-    top: -7px;
-    right: -7px;
-  }
-
-  .thought {
-    font-size: 1.17rem;
-
-    line-height: 1.48;
-
-    margin-top: 8px;
-  }
-
-  .btn {
-    margin-top: 15px;
-
-    padding: 12px 27px;
-
-    font-size: .88rem;
-  }
-
-  .gift {
-    font-size: 65px;
-
-    margin: 2px 0;
-  }
-
-  .tag {
-    padding: 5px 10px;
-
-    font-size: .72rem;
-
-    margin: 3px;
-  }
-
-  .dots {
-    bottom: 9px;
-
-    gap: 5px;
-
-    padding: 7px 11px;
-  }
-
-  .dot {
-    width: 19px;
-    height: 5px;
-  }
-
-  .dot.on {
-    width: 31px;
-  }
-
-  .topBar {
-    top: 9px;
-
-    left: 9px;
-    right: 9px;
-  }
-
-  .iconBtn {
-    width: 40px;
-    height: 40px;
-
-    font-size: 17px;
-  }
-
-  .o1 {
-    width: 350px;
-    height: 350px;
-  }
-
-  .o2 {
-    width: 300px;
-    height: 300px;
-  }
-
-  .o3 {
-    width: 250px;
-    height: 250px;
-  }
-
-}
-
-
-/* =========================
-   VERY SMALL PHONES
-========================= */
-
-@media (max-width: 380px) {
-
-  h1 {
-    font-size: 2.7rem;
-  }
-
-  .photoBox {
-    width: 155px;
-    height: 155px;
-  }
-
-  .card {
-    padding: 20px 14px 24px;
-  }
-
-  .thought {
-    font-size: 1.08rem;
-  }
-
-}
-
-
-/* =========================
-   DESKTOP HEART CURSOR
-========================= */
-
-@media (min-width: 601px) {
-
-  body {
-    cursor: default;
-  }
-
-}
-
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Poppins',sans-serif;background:#0a0612;height:100vh;overflow:hidden;cursor:none}
+.orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.6;animation:floatOrb 14s infinite alternate}
+.o1{width:600px;height:600px;background:radial-gradient(circle,#ff4d6d,#7c3aed);top:-20%;left:-20%}.o2{width:500px;height:500px;background:radial-gradient(circle,#fb7185,#f59e0b);bottom:-15%;right:-15%;animation-delay:3s}.o3{width:400px;height:400px;background:radial-gradient(circle,#a78bfa,#ec4899);top:30%;left:40%;animation-delay:6s}
+@keyframes floatOrb{to{transform:translate(120px,80px) scale(1.3)}}
+.page{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;transform:translateY(80px) scale(.85) rotateX(10deg);transition:1s cubic-bezier(.16,1,.3,1);pointer-events:none;perspective:1000px}
+.page.active{opacity:1;transform:translateY(0) scale(1) rotateX(0);pointer-events:all}
+.card{width:100%;max-width:440px;background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.05));backdrop-filter:blur(40px);border:1.5px solid rgba(255,255,255,.18);border-radius:36px;padding:28px 26px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.3),0 0 0 1px rgba(255,255,255,.05);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);animation:shine 3s infinite}
+@keyframes shine{to{left:100%}}
+h1{font-family:'Great Vibes',cursive;font-size:4rem;background:linear-gradient(90deg,#fff,#fda4af,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;animation:grad 3s linear infinite}
+@keyframes grad{to{background-position:200%}}
+h2{font-size:.7rem;letter-spacing:5px;color:#fda4af;text-transform:uppercase;margin-bottom:6px}
+.thought{font-family:'Caveat',cursive;font-size:1.38rem;line-height:1.6;color:#fff0f5;margin-top:12px;text-shadow:0 2px 10px rgba(0,0,0,.3)}
+.photoBox{width:200px;height:200px;margin:14px auto;position:relative;transform-style:preserve-3d;transition:.6s}
+.photoBox img{width:100%;height:100%;object-fit:cover;border-radius:26px;border:4px solid white;box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 30px rgba(255,77,109,.3)}
+.photoBox::after{content:'❤️';position:absolute;top:-10px;right:-10px;width:36px;height:36px;background:white;border-radius:50%;display:grid;place-items:center;box-shadow:0 5px 15px rgba(0,0,0,.3)}
+.btn{margin-top:18px;background:linear-gradient(135deg,#ff4d6d 0%,#f43f5e 50%,#ec4899 100%);color:white;border:none;padding:14px 38px;border-radius:50px;font-weight:800;letter-spacing:.5px;cursor:pointer;box-shadow:0 12px 30px rgba(255,77,109,.5),inset 0 1px 0 rgba(255,255,255,.3);transition:.3s;position:relative;overflow:hidden}
+.btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 18px 40px rgba(255,77,109,.6)}
+.progress{position:fixed;top:0;left:0;height:5px;background:linear-gradient(90deg,#ff4d6d,#a78bfa,#f43f5e);transition:.7s;z-index:100;box-shadow:0 0 10px #ff4d6d}
+.dots{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:9px;z-index:50;background:rgba(0,0,0,.3);padding:10px 18px;border-radius:50px;backdrop-filter:blur(10px)}
+.dot{width:32px;height:6px;border-radius:10px;background:rgba(255,255,255,.25);transition:.5s;cursor:pointer}.dot.on{width:52px;background:white;box-shadow:0 0 15px white}
+.topBar{position:fixed;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;z-index:60}
+.iconBtn{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.12);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;font-size:20px;cursor:pointer;transition:.3s}
+.cursor{position:fixed;width:20px;height:20px;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform.1s}
+.trail{position:fixed;pointer-events:none;z-index:99998;animation:trail 1.2s forwards}
+@keyframes trail{0%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{transform:translate(-50%,-80px) scale(0);opacity:0}}
+.gift{font-size:80px;animation:giftPop 1.2s infinite alternate;cursor:pointer;filter:drop-shadow(0 0 20px #ff4d6d)}@keyframes giftPop{to{transform:scale(1.25) rotate(5deg)}}
+.tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.15);padding:6px 14px;border-radius:50px;font-size:.8rem;font-weight:700;margin:4px;display:inline-block}
 </style>
 </head>
-
-
 <body>
 
+<div class="progress" id="bar"></div>
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+<div class="cursor" id="cursor">💖</div>
+<div class="dots" id="dots"></div>
+<div class="topBar"><div class="iconBtn" onclick="go((cur-1+total)%total)">←</div><div class="iconBtn" id="musicBtn" onclick="toggleMusic()">🎵</div></div>
 
-<!-- =========================
-     BACKGROUND
-========================= -->
-
-<div class="orb o1"></div>
-<div class="orb o2"></div>
-<div class="orb o3"></div>
-
-
-<!-- =========================
-     TOP BUTTONS
-========================= -->
-
-<div class="topBar">
-
-  <button
-    class="iconBtn"
-    onclick="previousPage()"
-    aria-label="Previous page">
-    ←
-  </button>
-
-  <button
-    class="iconBtn"
-    onclick="toggleMusic()"
-    aria-label="Music">
-    🎵
-  </button>
-
+<!-- PAGE 1 -->
+<div class="page active" id="p0">
+<div class="card">
+<h2>For Someone Special</h2><h1>Happy Birthday!</h1>
+<div class="photoBox" id="tilt0"><img src="photo1.jpg"></div>
+<p class="thought">Varsha, your birthday isn't just a date — it's a reminder of how beautiful life becomes when souls like you exist. The way you laugh, the way you care, you make ordinary days feel like festivals. Stay magical!</p>
+<button class="btn" onclick="go(1)">Next Surprise →</button>
+</div>
 </div>
 
-
-<!-- =========================
-     PAGE 1
-========================= -->
-
-<section class="page active">
-
-  <div class="card">
-
-    <h2>For Someone Special</h2>
-
-    <h1>Happy Birthday!</h1>
-
-    <div class="photoBox">
-
-      <img
-        src="photo1.jpg"
-        alt="Varsha">
-
-    </div>
-
-    <p class="thought">
-
-      Varsha, your birthday isn't just a date —
-      it's a reminder of how beautiful life becomes
-      when souls like you exist.
-
-      The way you laugh, the way you care,
-      you make ordinary days feel like festivals.
-
-      Stay magical!
-
-    </p>
-
-    <button
-      class="btn"
-      onclick="nextPage()">
-
-      Next Surprise →
-
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PAGE 2
-========================= -->
-
-<section class="page">
-
-  <div class="card">
-
-    <h2>02 • CUTENESS</h2>
-
-    <h1>Cutest Soul ✨</h1>
-
-    <div class="photoBox">
-
-      <img
-        src="photo2.jpg"
-        alt="Varsha">
-
-    </div>
-
-    <p class="thought">
-
-      Niv yaka ishtu cute agi edhira? 😂
-
-      No filter, no effort —
-      your pout, your angry face,
-      your sleepy texts, everything is cute.
-
-      If cuteness had a face,
-      it would be you, Varsha.
-
-      Please never change!
-
-    </p>
-
-    <button
-      class="btn"
-      onclick="nextPage()">
-
-      Next →
-
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PAGE 3
-========================= -->
-
-<section class="page">
-
-  <div class="card">
-
-    <h2>03 • CARE ❤️</h2>
-
-    <h1>Your Care</h1>
-
-    <div class="photoBox">
-
-      <img
-        src="photo3.jpg"
-        alt="Varsha">
-
-    </div>
-
-    <p class="thought">
-
-      You don't care loudly,
-      you care deeply.
-
-      You notice when I'm low,
-      you remember what I like,
-      you check on me without reason.
-
-      That kind of care is not taught —
-      it's gifted.
-
-      And you are gifted.
-
-    </p>
-
-    <button
-      class="btn"
-      onclick="nextPage()">
-
-      Next →
-
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PAGE 4
-========================= -->
-
-<section class="page">
-
-  <div class="card">
-
-    <h2>
-      04 • RESPECT, SUPPORT, KINDNESS
-    </h2>
-
-    <h1>Golden Heart 🫶</h1>
-
-    <div class="photoBox">
-
-      <img
-        src="photo4.jpg"
-        alt="Varsha">
-
-    </div>
-
-    <div class="tags">
-
-      <span class="tag">
-        Respect 🫶
-      </span>
-
-      <span class="tag">
-        Support 🤝
-      </span>
-
-      <span class="tag">
-        Kindness 🌸
-      </span>
-
-    </div>
-
-    <p class="thought">
-
-      You respect everyone,
-      you support without conditions,
-      and your kindness...
-      it doesn't have an off-button.
-
-      In a world of fake,
-      you are the most real.
-
-      That's why everyone loves you.
-
-    </p>
-
-    <button
-      class="btn"
-      onclick="nextPage()">
-
-      Next →
-
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PAGE 5
-========================= -->
-
-<section class="page">
-
-  <div class="card">
-
-    <h2>05 • GROWING & SAFE</h2>
-
-    <h1>Safe With You 😊</h1>
-
-    <div class="photoBox">
-
-      <img
-        src="photo5.jpg"
-        alt="Varsha">
-
-    </div>
-
-    <p class="thought">
-
-      With you, I don't need to pretend.
-
-      I can be silly, emotional,
-      or completely useless —
-      and still feel safe.
-
-      Watching you grow, glow
-      and handle life so strongly
-      is inspiring.
-
-      You feel like home, Varsha.
-
-    </p>
-
-    <button
-      class="btn"
-      onclick="nextPage()">
-
-      Next →
-
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PAGE 6
-========================= -->
-
-<section class="page">
-
-  <div class="card">
-
-    <h2>
-      06 • FORGIVENESS & ACCEPTANCE
-    </h2>
-
-    <h1>Big Heart 🤍</h1>
-
-    <div class="photoBox">
-
-      <img
-        src="photo6.jpg"
-        alt="Varsha">
-
-    </div>
-
-    <p class="thought">
-
-      You forgive even when
-      you shouldn't have to.
-
-      You accept people
-      with all their flaws.
-
-      That takes a heart
-      bigger than the world —
-      and you have it.
-
-      May life be as gentle to you
-      as you are to everyone.
-
-    </p>
-
-    <button
-      class="btn"
-      onclick="nextPage()">
-
-      Last Page →
-
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PAGE 7
-========================= -->
-
-<section class="page lastPage">
-
-  <div class="card">
-
-    <h2>
-      07 • LOYALTY • BOND THAT NEVER BREAKS
-    </h2>
-
-    <h1>My Varsha 🔒</h1>
-
-    <div class="gift">
-      🎁
-    </div>
-
-    <div class="photoBox">
-
-      <img
-        src="photo7.jpg"
-        alt="Varsha">
-
-    </div>
-
-    <p class="thought">
-
-      Some people come as friends,
-      but stay as luck.
-
-      <br><br>
-
-      V — Very few hearts are this pure,<br>
-
-      A — Always my favourite chaos,<br>
-
-      R — Really my bestest friend,<br>
-
-      S — Softest place to fall,<br>
-
-      H — Home in human form,<br>
-
-      A — And my forever luck.
-
-      <br><br>
-
-      Varsha, some bonds don't need promises —
-      they are just meant to stay.
-
-      You are my bestest friend,
-      my luck.
-
-      Life is simply better with you in it.
-
-      Happy Birthday! ❤️
-
-    </p>
-
-    <button
-      class="btn"
-      onclick="restart()">
-
-      Replay From Start ↺
-
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PAGE DOTS
-========================= -->
-
-<div class="dots">
-
-  <div
-    class="dot on"
-    onclick="goToPage(0)">
-  </div>
-
-  <div
-    class="dot"
-    onclick="goToPage(1)">
-  </div>
-
-  <div
-    class="dot"
-    onclick="goToPage(2)">
-  </div>
-
-  <div
-    class="dot"
-    onclick="goToPage(3)">
-  </div>
-
-  <div
-    class="dot"
-    onclick="goToPage(4)">
-  </div>
-
-  <div
-    class="dot"
-    onclick="goToPage(5)">
-  </div>
-
-  <div
-    class="dot"
-    onclick="goToPage(6)">
-  </div>
-
+<!-- PAGE 2 -->
+<div class="page" id="p1">
+<div class="card">
+<h2>02 • CUTENESS</h2><h1>Cutest Soul ✨</h1>
+<div class="photoBox"><img src="photo2.jpg"></div>
+<p class="thought">Niv yaka ishtu cute agi edhira? 😂 No filter, no effort — your pout, your angry face, your sleepy texts, everything is cute. If cuteness had a face, it would be you, Varsha. Please never change!</p>
+<button class="btn" onclick="go(2)">Next →</button>
+</div>
 </div>
 
+<!-- PAGE 3 -->
+<div class="page" id="p2">
+<div class="card">
+<h2>03 • CARE ❤️</h2><h1>Your Care</h1>
+<div class="photoBox"><img src="photo3.jpg"></div>
+<p class="thought">You don't care loudly, you care deeply. You notice when I'm low, you remember what I like, you check on me without reason. That kind of care is not taught — it's gifted. And you are gifted.</p>
+<button class="btn" onclick="go(3)">Next →</button>
+</div>
+</div>
 
-<!-- =========================
-     JAVASCRIPT
-========================= -->
+<!-- PAGE 4 -->
+<div class="page" id="p3">
+<div class="card">
+<h2>04 • RESPECT, SUPPORT, KINDNESS</h2><h1>Golden Heart 🫶</h1>
+<div class="photoBox"><img src="photo4.jpg"></div>
+<p class="thought"><span class="tag">Respect 🫶</span><span class="tag">Support 🤝</span><span class="tag">Kindness 🌸</span><br><br>You respect everyone, you support without conditions, and your kindness... it doesn't have an off-button. In a world of fake, you are the most real. That's why everyone loves you.</p>
+<button class="btn" onclick="go(4)">Next →</button>
+</div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p4">
+<div class="card">
+<h2>05 • GROWING & SAFE</h2><h1>Safe With You 😊</h1>
+<div class="photoBox"><img src="photo5.jpg"></div>
+<p class="thought">With you, I don't need to pretend. I can be silly, emotional, or completely useless — and still feel safe. Watching you grow, glow and handle life so strongly is inspiring. You feel like home, Varsha.</p>
+<button class="btn" onclick="go(5)">Next →</button>
+</div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p5">
+<div class="card">
+<h2>06 • FORGIVENESS & ACCEPTANCE</h2><h1>Big Heart 🤍</h1>
+<div class="photoBox"><img src="photo6.jpg"></div>
+<p class="thought">You forgive even when you shouldn't have to. You accept people with all their flaws. That takes a heart bigger than the world — and you have it. May life be as gentle to you as you are to everyone.</p>
+<button class="btn" onclick="go(6)">Last Page →</button>
+</div>
+</div>
+
+<!-- PAGE 7 FINAL -->
+<div class="page" id="p6">
+<div class="card">
+<h2>07 • LOYALTY • BOND THAT NEVER BREAKS</h2><h1 style="font-size:3.3rem">My Varsha 🔒</h1>
+<div class="gift" onclick="megaBlast()">🎁</div>
+<div class="photoBox"><img src="photo7.jpg"></div>
+<p class="thought" style="font-size:1.25rem">
+Some people come as friends, but stay as luck.<br>
+<b>V</b> — Very few hearts are this pure,<br>
+<b>A</b> — Always my favourite chaos,<br>
+<b>R</b> — Really my bestest friend,<br>
+<b>S</b> — Softest place to fall,<br>
+<b>H</b> — Home in human form,<br>
+<b>A</b> — And my forever luck.<br><br>
+Varsha, some bonds don't need promises — they are just meant to stay. You are my bestest friend, my luck. Life is simply better with you in it. Happy Birthday! ❤️
+</p>
+<button class="btn" onclick="go(0)">Replay From Start ↺</button>
+</div>
+</div>
+
+<audio id="music" loop preload="auto"><source src="https://cdn.pixabay.com/audio/2022/10/30/audio_8c0f7e4c7b.mp3" type="audio/mpeg"></audio>
 
 <script>
+let cur=0,total=7,isPlaying=false;
+const music=document.getElementById('music'); music.volume=0.22;
 
-let currentPage = 0;
-
-const pages =
-  document.querySelectorAll(".page");
-
-const dots =
-  document.querySelectorAll(".dot");
-
-
-/* =========================
-   SHOW PAGE
-========================= */
-
-function showPage(index) {
-
-  if (index < 0) {
-    index = 0;
-  }
-
-  if (index >= pages.length) {
-    index = pages.length - 1;
-  }
-
-  pages.forEach(function(page, i) {
-
-    if (i === index) {
-
-      page.classList.add("active");
-
-    } else {
-
-      page.classList.remove("active");
-
-    }
-
-  });
-
-
-  dots.forEach(function(dot, i) {
-
-    if (i === index) {
-
-      dot.classList.add("on");
-
-    } else {
-
-      dot.classList.remove("on");
-
-    }
-
-  });
-
-
-  currentPage = index;
-
+function toggleMusic(){
+isPlaying=!isPlaying;
+isPlaying?music.play():music.pause();
+document.getElementById('musicBtn').innerText=isPlaying?'🎵':'🔇'
 }
 
+function go(n){
+cur=(n+total)%total;
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById('p'+cur).classList.add('active');
+document.getElementById('bar').style.width=((cur+1)/total*100)+'%';
+document.querySelectorAll('.dot').forEach((d,i)=>d.className=i==cur?'dot on':'dot');
 
-/* =========================
-   NEXT
-========================= */
-
-function nextPage() {
-
-  if (currentPage < pages.length - 1) {
-
-    showPage(currentPage + 1);
-
-  }
-
+if(!isPlaying){
+music.play().then(()=>isPlaying=true).catch(()=>{});
+document.getElementById('musicBtn').innerText='🎵'
 }
 
+confetti({particleCount:90,spread:100,origin:{y:.7},colors:['#ff4d6d','#fda4af','#a78bfa']});
 
-/* =========================
-   PREVIOUS
-========================= */
-
-function previousPage() {
-
-  if (currentPage > 0) {
-
-    showPage(currentPage - 1);
-
-  }
-
+if(cur==6)megaBlast()
 }
 
-
-/* =========================
-   GO TO PAGE
-========================= */
-
-function goToPage(index) {
-
-  showPage(index);
-
+for(let i=0;i<total;i++){
+let d=document.createElement('div');
+d.className=i==0?'dot on':'dot';
+d.onclick=()=>go(i);
+document.getElementById('dots').appendChild(d)
 }
 
-
-/* =========================
-   RESTART
-========================= */
-
-function restart() {
-
-  showPage(0);
-
+function megaBlast(){
+let end=Date.now()+4000;
+(function frame(){
+confetti({particleCount:7,angle:60,spread:80,origin:{x:0},colors:['#ff4d6d','#ffd700','#a78bfa']});
+confetti({particleCount:7,angle:120,spread:80,origin:{x:1},colors:['#ff4d6d','#fff','#fb7185']});
+if(Date.now()<end)requestAnimationFrame(frame)
+})();
+confetti({particleCount:200,spread:160,origin:{y:.6},startVelocity:45})
 }
 
-
-/* =========================
-   KEYBOARD
-========================= */
-
-document.addEventListener(
-  "keydown",
-  function(event) {
-
-    if (event.key === "ArrowRight") {
-
-      nextPage();
-
-    }
-
-    if (event.key === "ArrowLeft") {
-
-      previousPage();
-
-    }
-
-  }
-);
-
-
-/* =========================
-   SWIPE
-========================= */
-
-let touchStartX = 0;
-
-let touchEndX = 0;
-
-
-document.addEventListener(
-  "touchstart",
-  function(event) {
-
-    touchStartX =
-      event.changedTouches[0].screenX;
-
-  }
-);
-
-
-document.addEventListener(
-  "touchend",
-  function(event) {
-
-    touchEndX =
-      event.changedTouches[0].screenX;
-
-    const difference =
-      touchEndX - touchStartX;
-
-
-    if (Math.abs(difference) < 50) {
-
-      return;
-
-    }
-
-
-    if (difference < 0) {
-
-      nextPage();
-
-    } else {
-
-      previousPage();
-
-    }
-
-  }
-);
-
-
-/* =========================
-   MUSIC
-========================= */
-
-let musicPlaying = false;
-
-function toggleMusic() {
-
-  const music =
-    document.getElementById("music");
-
-
-  if (!music) {
-
-    alert(
-      "Music is not added yet 🎵"
-    );
-
-    return;
-
-  }
-
-
-  if (musicPlaying) {
-
-    music.pause();
-
-    musicPlaying = false;
-
-  } else {
-
-    music.play()
-      .then(function() {
-
-        musicPlaying = true;
-
-      })
-      .catch(function() {
-
-        alert(
-          "Tap the music button again to start the music."
-        );
-
-      });
-
-  }
-
-}
-
-
-/* =========================
-   DESKTOP HEART TRAIL
-========================= */
-
-document.addEventListener(
-  "pointermove",
-  function(event) {
-
-    if (window.innerWidth <= 600) {
-
-      return;
-
-    }
-
-
-    const heart =
-      document.createElement("span");
-
-
-    heart.innerHTML = "❤️";
-
-
-    heart.style.position = "fixed";
-
-    heart.style.left =
-      event.clientX + "px";
-
-    heart.style.top =
-      event.clientY + "px";
-
-    heart.style.pointerEvents =
-      "none";
-
-    heart.style.fontSize =
-      "12px";
-
-    heart.style.zIndex =
-      "9999";
-
-    heart.style.transform =
-      "translate(-50%, -50%)";
-
-
-    document.body.appendChild(heart);
-
-
-    heart.animate(
-
-      [
-        {
-          opacity: 1,
-
-          transform:
-            "translate(-50%, -50%) scale(1)"
-        },
-
-        {
-          opacity: 0,
-
-          transform:
-            "translate(-50%, -80px) scale(.3)"
-        }
-      ],
-
-      {
-        duration: 800,
-
-        easing: "ease-out"
-      }
-
-    );
-
-
-    setTimeout(
-      function() {
-
-        heart.remove();
-
-      },
-      800
-    );
-
-  }
-);
-
-
-/* =========================
-   CONFETTI
-========================= */
-
-function createConfetti() {
-
-  for (
-    let i = 0;
-    i < 45;
-    i++
-  ) {
-
-    const piece =
-      document.createElement("span");
-
-
-    const symbols = [
-      "❤️",
-      "💖",
-      "✨",
-      "🌸",
-      "🎉"
-    ];
-
-
-    piece.innerHTML =
-      symbols[
-        Math.floor(
-          Math.random() *
-          symbols.length
-        )
-      ];
-
-
-    piece.style.position =
-      "fixed";
-
-    piece.style.left =
-      Math.random() * 100 + "vw";
-
-    piece.style.top =
-      "-30px";
-
-    piece.style.fontSize =
-      (12 + Math.random() * 15) + "px";
-
-    piece.style.zIndex =
-      "9999";
-
-    piece.style.pointerEvents =
-      "none";
-
-
-    document.body.appendChild(piece);
-
-
-    const animation =
-      piece.animate(
-        [
-          {
-            transform:
-              "translateY(0) rotate(0deg)",
-            opacity: 1
-          },
-          {
-            transform:
-              "translateY(110vh) rotate(360deg)",
-            opacity: 0
-          }
-        ],
-        {
-          duration: 2500 + Math.random() * 2000,
-          easing: "linear"
-        }
-      );
-
-    animation.onfinish =
-      function() {
-        piece.remove();
-      };
-
-  }
-}
-
-
-/* =========================
-   START
-========================= */
-
-showPage(0);
-
-
-/* =========================
-   CLOSE SCRIPT
-========================= */
-
+const cursor=document.getElementById('cursor');
+let mouseX=0,mouseY=0,cx=0,cy=0;
+
+document.addEventListener('mousemove',e=>{
+mouseX=e.clientX;
+mouseY=e.clientY;
+let t=document.createElement('div');
+t.className='trail';
+t.innerText=['💖','✨','🌸','💫'][Math.floor(Math.random()*4)];
+t.style.left=e.clientX+'px';
+t.style.top=e.clientY+'px';
+t.style.fontSize=14+Math.random()*12+'px';
+document.body.appendChild(t);
+setTimeout(()=>t.remove(),1200)
+});
+
+(function loop(){
+cx+=(mouseX-cx)*0.15;
+cy+=(mouseY-cy)*0.15;
+cursor.style.left=cx+'px';
+cursor.style.top=cy+'px';
+requestAnimationFrame(loop)
+})();
+
+document.addEventListener('touchmove',e=>{
+let tt=e.touches[0];
+let tr=document.createElement('div');
+tr.className='trail';
+tr.innerText='💖';
+tr.style.left=tt.clientX+'px';
+tr.style.top=tt.clientY+'px';
+document.body.appendChild(tr);
+setTimeout(()=>tr.remove(),1000)
+});
+
+document.querySelectorAll('.photoBox').forEach(box=>{
+box.addEventListener('mousemove',e=>{
+let r=box.getBoundingClientRect();
+let x=e.clientX-r.left-r.width/2;
+let y=e.clientY-r.top-r.height/2;
+box.style.transform=`perspective(600px) rotateY(${x/10}deg) rotateX(${-y/10}deg) scale(1.08)`
+});
+box.addEventListener('mouseleave',()=>box.style.transform='perspective(600px) rotateY(0) rotateX(0) scale(1)')
+});
 </script>
-
 </body>
 </html>
