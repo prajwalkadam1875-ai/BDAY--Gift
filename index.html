@@ -3,80 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Varsha - A Little Surprise ❤️</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;800&family=Great+Vibes&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<title>Happy Birthday Varsha ❤️</title>
 
 <style>
-
-/* =========================
-   GLOBAL
-========================= */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
 }
 
 body{
     font-family:'Poppins',sans-serif;
-    background:#0a0612;
-    height:100vh;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(255,105,180,.20),transparent 30%),
+        radial-gradient(circle at 80% 80%,rgba(138,43,226,.20),transparent 30%),
+        linear-gradient(135deg,#120018,#25002e,#100018);
+    color:white;
     overflow:hidden;
-    cursor:none;
 }
 
 /* =========================
-   BACKGROUND ORBS
+   BACKGROUND
 ========================= */
 
-.orb{
+.bg{
     position:fixed;
-    border-radius:50%;
-    filter:blur(90px);
-    opacity:.6;
-    animation:floatOrb 14s infinite alternate;
+    inset:0;
+    overflow:hidden;
+    z-index:0;
     pointer-events:none;
 }
 
-.o1{
-    width:600px;
-    height:600px;
-    background:radial-gradient(circle,#ff4d6d,#7c3aed);
-    top:-20%;
-    left:-20%;
+.glow{
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.35;
+    animation:floatGlow 8s ease-in-out infinite alternate;
 }
 
-.o2{
-    width:500px;
-    height:500px;
-    background:radial-gradient(circle,#fb7185,#f59e0b);
-    bottom:-15%;
-    right:-15%;
-    animation-delay:3s;
+.glow.one{
+    background:#ff4fa3;
+    top:-120px;
+    left:-100px;
 }
 
-.o3{
-    width:400px;
-    height:400px;
-    background:radial-gradient(circle,#a78bfa,#ec4899);
-    top:30%;
-    left:40%;
-    animation-delay:6s;
+.glow.two{
+    background:#8a2be2;
+    right:-120px;
+    bottom:-100px;
+    animation-delay:2s;
 }
 
-@keyframes floatOrb{
+.glow.three{
+    background:#ffb6d9;
+    top:40%;
+    left:45%;
+    width:180px;
+    height:180px;
+    opacity:.18;
+    animation-delay:4s;
+}
+
+@keyframes floatGlow{
+    from{
+        transform:translate(0,0) scale(1);
+    }
     to{
-        transform:translate(120px,80px) scale(1.3);
+        transform:translate(40px,30px) scale(1.2);
     }
 }
 
 /* =========================
-   LOCKER SCREEN
+   CURSOR
+========================= */
+
+.cursor{
+    position:fixed;
+    width:18px;
+    height:18px;
+    border:2px solid #ff9bd3;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:20000;
+    transform:translate(-50%,-50%);
+    transition:.08s;
+    box-shadow:0 0 15px #ff69b4;
+}
+
+@media(pointer:coarse){
+    .cursor{
+        display:none;
+    }
+}
+
+/* =========================
+   LOCKER
 ========================= */
 
 #locker{
@@ -88,805 +119,580 @@ body{
     justify-content:center;
     padding:20px;
     background:
-        radial-gradient(circle at 20% 20%,rgba(255,77,109,.18),transparent 30%),
-        radial-gradient(circle at 80% 80%,rgba(167,139,250,.18),transparent 30%),
-        #08040f;
-    transition:
-        opacity 1s ease,
-        transform 1s cubic-bezier(.16,1,.3,1);
+        radial-gradient(circle at 50% 20%,rgba(255,105,180,.18),transparent 35%),
+        rgba(10,0,18,.97);
+    transition:opacity .8s ease,visibility .8s ease;
 }
 
 #locker.hide{
     opacity:0;
-    transform:scale(1.15);
+    visibility:hidden;
     pointer-events:none;
 }
 
-.lockerParticles{
-    position:absolute;
-    inset:0;
-    overflow:hidden;
-    pointer-events:none;
-}
-
-.lockerParticle{
-    position:absolute;
-    font-size:18px;
-    opacity:.7;
-    animation:particleFloat linear infinite;
-}
-
-@keyframes particleFloat{
-    0%{
-        transform:translateY(110vh) rotate(0deg);
-        opacity:0;
-    }
-
-    10%{
-        opacity:.8;
-    }
-
-    90%{
-        opacity:.8;
-    }
-
-    100%{
-        transform:translateY(-20vh) rotate(360deg);
-        opacity:0;
-    }
-}
-
-.lockerCard{
-    width:100%;
-    max-width:430px;
-    padding:38px 28px 34px;
-    text-align:center;
-    position:relative;
-    z-index:2;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.14),
-            rgba(255,255,255,.04)
-        );
-
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:38px;
-
-    backdrop-filter:blur(35px);
-
+.locker-box{
+    width:min(430px,100%);
+    padding:38px 25px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:30px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
     box-shadow:
-        0 40px 100px rgba(0,0,0,.65),
-        inset 0 1px 0 rgba(255,255,255,.3),
-        0 0 60px rgba(255,77,109,.12);
-
-    animation:lockerAppear 1.2s cubic-bezier(.16,1,.3,1);
+        0 25px 80px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.12);
+    text-align:center;
+    animation:lockerIn 1s ease;
 }
 
-@keyframes lockerAppear{
+@keyframes lockerIn{
     from{
         opacity:0;
-        transform:
-            translateY(80px)
-            scale(.7)
-            rotateX(15deg);
+        transform:translateY(30px) scale(.95);
     }
-
     to{
         opacity:1;
-        transform:
-            translateY(0)
-            scale(1)
-            rotateX(0);
+        transform:translateY(0) scale(1);
     }
 }
 
-.lockerCard::before{
-    content:'';
-    position:absolute;
-    inset:-2px;
-    border-radius:40px;
-    background:
-        linear-gradient(
-            120deg,
-            transparent,
-            rgba(255,255,255,.18),
-            transparent
-        );
-    z-index:-1;
-    animation:lockerShine 4s infinite;
+.lock-icon{
+    width:85px;
+    height:85px;
+    margin:0 auto 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ff4fa3,#8a2be2);
+    font-size:40px;
+    box-shadow:0 0 40px rgba(255,79,163,.5);
+    animation:pulse 2s infinite;
 }
 
-@keyframes lockerShine{
-    0%{
-        transform:translateX(-100%);
-    }
-
-    50%,100%{
-        transform:translateX(100%);
-    }
-}
-
-.lockerSmall{
-    color:#fda4af;
-    font-size:.68rem;
-    letter-spacing:5px;
-    text-transform:uppercase;
-    font-weight:800;
-    margin-bottom:12px;
-}
-
-.lockerTitle{
-    font-family:'Great Vibes',cursive;
-    font-size:3.5rem;
-    line-height:1;
-    background:linear-gradient(
-        90deg,
-        #fff,
-        #fda4af,
-        #fff,
-        #fda4af
-    );
-    background-size:250%;
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    animation:lockerGradient 4s linear infinite;
-}
-
-@keyframes lockerGradient{
-    to{
-        background-position:250%;
-    }
-}
-
-.lockIcon{
-    width:105px;
-    height:105px;
-    margin:25px auto 20px;
-    border-radius:32px;
-
-    display:grid;
-    place-items:center;
-
-    font-size:55px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.18),
-            rgba(255,255,255,.05)
-        );
-
-    border:1px solid rgba(255,255,255,.2);
-
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.45),
-        0 0 40px rgba(255,77,109,.18);
-
-    animation:
-        lockFloat 3s ease-in-out infinite,
-        lockGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes lockFloat{
+@keyframes pulse{
     0%,100%{
-        transform:translateY(0) rotate(0);
+        transform:scale(1);
+        box-shadow:0 0 30px rgba(255,79,163,.4);
     }
-
     50%{
-        transform:translateY(-8px) rotate(2deg);
+        transform:scale(1.06);
+        box-shadow:0 0 55px rgba(255,79,163,.7);
     }
 }
 
-@keyframes lockGlow{
-    from{
-        box-shadow:
-            0 20px 50px rgba(0,0,0,.45),
-            0 0 25px rgba(255,77,109,.15);
-    }
-
-    to{
-        box-shadow:
-            0 20px 50px rgba(0,0,0,.45),
-            0 0 55px rgba(255,77,109,.4);
-    }
+.locker-box h1{
+    font-family:'Great Vibes',cursive;
+    font-size:48px;
+    font-weight:400;
+    margin-bottom:8px;
 }
 
-.lockerMessage{
-    font-family:'Caveat',cursive;
-    color:#fff0f5;
-    font-size:1.35rem;
-    line-height:1.4;
-    margin-bottom:22px;
+.locker-box p{
+    color:#e9d7e6;
+    font-size:14px;
+    line-height:1.7;
+    margin-bottom:25px;
 }
 
-.passwordBox{
+.password-row{
     display:flex;
     justify-content:center;
     gap:8px;
-    margin:15px 0 18px;
+    margin-bottom:22px;
 }
 
 .passInput{
-    width:42px;
-    height:52px;
-
+    width:46px;
+    height:56px;
     border-radius:13px;
-
-    border:1px solid rgba(255,255,255,.2);
-
-    background:rgba(255,255,255,.08);
-
+    border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.09);
     color:white;
-
     text-align:center;
-
-    font-size:22px;
-    font-weight:800;
-
+    font-size:24px;
     outline:none;
-
     transition:.25s;
 }
 
 .passInput:focus{
-    border-color:#ff4d6d;
-    box-shadow:
-        0 0 20px rgba(255,77,109,.35);
-
+    border-color:#ff75bd;
+    box-shadow:0 0 18px rgba(255,105,180,.45);
     transform:translateY(-3px);
 }
 
-.unlockBtn{
+.unlock-btn{
     width:100%;
-    padding:15px 25px;
-
+    padding:14px;
     border:none;
-    border-radius:50px;
-
+    border-radius:14px;
+    background:linear-gradient(135deg,#ff4fa3,#8a2be2);
     color:white;
-
-    font-weight:800;
-    letter-spacing:.5px;
-
-    cursor:pointer;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff4d6d,
-            #f43f5e,
-            #ec4899
-        );
-
-    box-shadow:
-        0 15px 35px rgba(255,77,109,.4),
-        inset 0 1px 0 rgba(255,255,255,.3);
-
-    transition:.3s;
-}
-
-.unlockBtn:hover{
-    transform:
-        translateY(-3px)
-        scale(1.02);
-
-    box-shadow:
-        0 20px 45px rgba(255,77,109,.55);
-}
-
-.hint{
-    color:rgba(255,255,255,.45);
-    font-size:.7rem;
-    margin-top:14px;
-}
-
-.error{
-    min-height:22px;
-    color:#ff8fa3;
-    font-size:.75rem;
+    font-family:'Poppins',sans-serif;
+    font-size:15px;
     font-weight:600;
-    margin-top:5px;
+    cursor:pointer;
+    transition:.25s;
+    box-shadow:0 10px 30px rgba(255,79,163,.25);
+}
+
+.unlock-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 15px 35px rgba(255,79,163,.4);
+}
+
+#wrong{
+    min-height:22px;
+    margin-top:12px;
+    color:#ff9ccf;
+    font-size:13px;
 }
 
 .shake{
-    animation:shake .45s ease;
+    animation:shake .4s ease;
 }
 
 @keyframes shake{
     0%,100%{transform:translateX(0)}
-    20%{transform:translateX(-10px)}
-    40%{transform:translateX(10px)}
-    60%{transform:translateX(-8px)}
-    80%{transform:translateX(8px)}
+    20%{transform:translateX(-8px)}
+    40%{transform:translateX(8px)}
+    60%{transform:translateX(-6px)}
+    80%{transform:translateX(6px)}
 }
 
 /* =========================
-   MAIN PAGES
+   MAIN UI
 ========================= */
+
+#mainUI{
+    position:fixed;
+    inset:0;
+    z-index:10;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .8s ease;
+}
+
+#mainUI.ready{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+    position:fixed;
+    top:18px;
+    left:18px;
+    right:18px;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    pointer-events:none;
+}
+
+.brand{
+    font-family:'Great Vibes',cursive;
+    font-size:30px;
+    color:#ffd0e9;
+    text-shadow:0 0 15px rgba(255,105,180,.5);
+}
+
+.music-btn{
+    pointer-events:auto;
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.08);
+    color:white;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    cursor:pointer;
+    backdrop-filter:blur(10px);
+    font-size:18px;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-wrap{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:3px;
+    z-index:150;
+    background:rgba(255,255,255,.08);
+}
+
+#progress{
+    height:100%;
+    width:14.28%;
+    background:linear-gradient(90deg,#ff4fa3,#c77dff);
+    transition:.5s;
+    box-shadow:0 0 10px #ff69b4;
+}
+
+/* =========================
+   PAGES
+========================= */
+
+#pages{
+    position:fixed;
+    inset:0;
+    z-index:20;
+}
 
 .page{
     position:absolute;
     inset:0;
 
     display:flex;
-    align-items:center;
+    align-items:flex-start;
     justify-content:center;
 
-    padding:18px;
+    padding:85px 18px 95px;
+
+    overflow-y:auto;
+    overflow-x:hidden;
 
     opacity:0;
-
-    transform:
-        translateY(80px)
-        scale(.85)
-        rotateX(10deg);
+    visibility:hidden;
+    pointer-events:none;
+    transform:translateX(35px) scale(.98);
 
     transition:
-        1s cubic-bezier(.16,1,.3,1);
+        opacity .55s ease,
+        transform .55s ease,
+        visibility .55s ease;
 
-    pointer-events:none;
-
-    perspective:1000px;
+    -webkit-overflow-scrolling:touch;
 }
 
 .page.active{
     opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:translateX(0) scale(1);
+    z-index:30;
+}
 
-    transform:
-        translateY(0)
-        scale(1)
-        rotateX(0);
+.page::-webkit-scrollbar{
+    width:7px;
+}
 
-    pointer-events:all;
+.page::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.page::-webkit-scrollbar-thumb{
+    background:rgba(255,125,190,.45);
+    border-radius:20px;
 }
 
 .card{
-    width:100%;
-    max-width:440px;
+    width:min(850px,100%);
+    margin:auto;
+    padding:35px 28px;
+    border-radius:32px;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.12),
-            rgba(255,255,255,.05)
-        );
+    background:rgba(255,255,255,.075);
+    border:1px solid rgba(255,255,255,.15);
 
-    backdrop-filter:blur(40px);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 
-    border:
-        1.5px solid
-        rgba(255,255,255,.18);
-
-    border-radius:36px;
-
-    padding:28px 26px;
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.4),
+        inset 0 1px 0 rgba(255,255,255,.1);
 
     text-align:center;
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.6),
-        inset 0 1px 0 rgba(255,255,255,.3),
-        0 0 0 1px rgba(255,255,255,.05);
-
-    position:relative;
-
-    overflow:hidden;
 }
 
-.card::before{
-    content:'';
-    position:absolute;
-
-    top:0;
-    left:-100%;
-
-    width:100%;
-    height:100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.1),
-            transparent
-        );
-
-    animation:shine 3s infinite;
+.card.small{
+    max-width:650px;
 }
 
-@keyframes shine{
-    to{
-        left:100%;
-    }
-}
-
-h1{
-    font-family:'Great Vibes',cursive;
-
-    font-size:4rem;
-
-    background:
-        linear-gradient(
-            90deg,
-            #fff,
-            #fda4af,
-            #fff
-        );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-
-    background-size:200%;
-
-    animation:grad 3s linear infinite;
-}
-
-@keyframes grad{
-    to{
-        background-position:200%;
-    }
-}
-
-h2{
-    font-size:.7rem;
-
-    letter-spacing:5px;
-
-    color:#fda4af;
-
+.kicker{
+    color:#ffacd8;
+    font-size:12px;
+    letter-spacing:4px;
     text-transform:uppercase;
-
-    margin-bottom:6px;
+    margin-bottom:10px;
 }
 
-.thought{
-    font-family:'Caveat',cursive;
-
-    font-size:1.38rem;
-
-    line-height:1.6;
-
-    color:#fff0f5;
-
-    margin-top:12px;
-
-    text-shadow:
-        0 2px 10px rgba(0,0,0,.3);
+.card h1{
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(50px,8vw,82px);
+    line-height:1;
+    font-weight:400;
+    margin-bottom:18px;
+    color:#fff;
+    text-shadow:0 0 25px rgba(255,105,180,.4);
 }
 
-.photoBox{
-    width:200px;
-    height:200px;
-
-    margin:14px auto;
-
-    position:relative;
-
-    transform-style:preserve-3d;
-
-    transition:.6s;
+.card h2{
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(42px,7vw,65px);
+    font-weight:400;
+    margin-bottom:16px;
 }
 
-.photoBox img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    border-radius:26px;
-
-    border:4px solid white;
-
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.5),
-        0 0 30px rgba(255,77,109,.3);
+.card p{
+    font-size:15px;
+    line-height:1.9;
+    color:#eaddea;
 }
 
-.photoBox::after{
-    content:'❤️';
-
-    position:absolute;
-
-    top:-10px;
-    right:-10px;
-
-    width:36px;
-    height:36px;
-
-    background:white;
-
-    border-radius:50%;
-
-    display:grid;
-
-    place-items:center;
-
-    box-shadow:
-        0 5px 15px rgba(0,0,0,.3);
+.highlight{
+    color:#ffb6dc;
 }
 
-.btn{
-    margin-top:18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff4d6d 0%,
-            #f43f5e 50%,
-            #ec4899 100%
-        );
-
-    color:white;
-
-    border:none;
-
-    padding:14px 38px;
-
-    border-radius:50px;
-
-    font-weight:800;
-
-    letter-spacing:.5px;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 12px 30px rgba(255,77,109,.5),
-        inset 0 1px 0 rgba(255,255,255,.3);
-
-    transition:.3s;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.btn:hover{
-    transform:
-        translateY(-3px)
-        scale(1.03);
-
-    box-shadow:
-        0 18px 40px rgba(255,77,109,.6);
-}
-
-.progress{
-    position:fixed;
-
-    top:0;
-    left:0;
-
-    height:5px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff4d6d,
-            #a78bfa,
-            #f43f5e
-        );
-
-    transition:.7s;
-
-    z-index:100;
-
-    box-shadow:
-        0 0 10px #ff4d6d;
-}
-
-.dots{
-    position:fixed;
-
-    bottom:20px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    display:flex;
-
-    gap:9px;
-
-    z-index:50;
-
-    background:rgba(0,0,0,.3);
-
-    padding:10px 18px;
-
-    border-radius:50px;
-
-    backdrop-filter:blur(10px);
-}
-
-.dot{
-    width:32px;
-    height:6px;
-
-    border-radius:10px;
-
-    background:rgba(255,255,255,.25);
-
-    transition:.5s;
-
-    cursor:pointer;
-}
-
-.dot.on{
-    width:52px;
-
-    background:white;
-
-    box-shadow:
-        0 0 15px white;
-}
-
-.topBar{
-    position:fixed;
-
-    top:14px;
-    left:14px;
-    right:14px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    z-index:60;
-}
-
-.iconBtn{
-    width:46px;
-    height:46px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.12);
-
-    backdrop-filter:blur(15px);
-
-    border:
-        1px solid
-        rgba(255,255,255,.2);
-
-    display:grid;
-
-    place-items:center;
-
-    font-size:20px;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.iconBtn:hover{
-    transform:scale(1.08);
-    background:rgba(255,255,255,.2);
+.divider{
+    width:80px;
+    height:2px;
+    margin:22px auto;
+    background:linear-gradient(90deg,transparent,#ff70b8,transparent);
 }
 
 /* =========================
-   CURSOR
+   PHOTO
 ========================= */
 
-.cursor{
-    position:fixed;
+.photo{
+    width:min(330px,90%);
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:24px;
+    margin:10px auto 25px;
+    display:block;
+    border:4px solid rgba(255,255,255,.15);
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
+    transition:.4s;
+}
 
+.photo:hover{
+    transform:scale(1.025) rotate(-1deg);
+    box-shadow:0 25px 60px rgba(255,79,163,.25);
+}
+
+/* =========================
+   PHOTO GRID
+========================= */
+
+.photo-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-top:22px;
+}
+
+.photo-grid img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:18px;
+    border:2px solid rgba(255,255,255,.12);
+    transition:.3s;
+}
+
+.photo-grid img:hover{
+    transform:translateY(-5px) scale(1.02);
+}
+
+/* =========================
+   MEMORY BOXES
+========================= */
+
+.memory-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-top:25px;
+}
+
+.memory{
+    padding:20px;
+    border-radius:20px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.09);
+    text-align:left;
+}
+
+.memory span{
+    display:block;
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.memory h3{
+    font-size:16px;
+    margin-bottom:7px;
+}
+
+.memory p{
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* =========================
+   WISHES
+========================= */
+
+.wish-list{
+    display:grid;
+    gap:13px;
+    margin-top:25px;
+}
+
+.wish{
+    padding:18px;
+    border-radius:18px;
+    background:rgba(255,255,255,.055);
+    border-left:3px solid #ff70b8;
+    text-align:left;
+}
+
+.wish p{
+    font-size:14px;
+}
+
+/* =========================
+   FINAL PAGE
+========================= */
+
+.final-card{
+    padding-top:45px;
+    padding-bottom:45px;
+}
+
+.big-heart{
+    font-size:65px;
+    display:inline-block;
+    animation:heartBeat 1.4s infinite;
+    margin-bottom:15px;
+}
+
+@keyframes heartBeat{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.13)}
+}
+
+.signature{
+    margin-top:30px;
+    font-family:'Great Vibes',cursive;
+    font-size:40px;
+    color:#ffacd8;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.nav{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:100;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.nav-btn{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.08);
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    backdrop-filter:blur(12px);
+    transition:.25s;
+}
+
+.nav-btn:hover{
+    background:rgba(255,105,180,.25);
+    transform:scale(1.08);
+}
+
+.dots{
+    display:flex;
+    gap:7px;
+    padding:7px 12px;
+    border-radius:30px;
+    background:rgba(255,255,255,.07);
+    backdrop-filter:blur(12px);
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:rgba(255,255,255,.3);
+    cursor:pointer;
+    transition:.3s;
+}
+
+.dot.active{
     width:20px;
-    height:20px;
-
-    pointer-events:none;
-
-    z-index:99999;
-
-    transform:
-        translate(-50%,-50%);
-
-    transition:
-        transform .1s;
+    border-radius:10px;
+    background:#ff78bb;
+    box-shadow:0 0 10px #ff78bb;
 }
 
-.trail{
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.heart{
     position:fixed;
-
+    bottom:-30px;
+    font-size:18px;
     pointer-events:none;
-
-    z-index:99998;
-
-    animation:
-        trail 1.2s forwards;
+    z-index:5;
+    animation:heartFloat linear forwards;
 }
 
-@keyframes trail{
-    0%{
-        transform:
-            translate(-50%,-50%)
-            scale(1);
-
-        opacity:1;
+@keyframes heartFloat{
+    from{
+        transform:translateY(0) rotate(0);
+        opacity:0;
     }
-
-    100%{
-        transform:
-            translate(-50%,-80px)
-            scale(0);
-
+    10%{
+        opacity:.8;
+    }
+    to{
+        transform:translateY(-110vh) rotate(360deg);
         opacity:0;
     }
 }
 
 /* =========================
-   GIFT
+   CONFETTI
 ========================= */
 
-.gift{
-    font-size:80px;
-
-    animation:
-        giftPop 1.2s infinite alternate;
-
-    cursor:pointer;
-
-    filter:
-        drop-shadow(
-            0 0 20px #ff4d6d
-        );
+.confetti{
+    position:fixed;
+    width:7px;
+    height:12px;
+    top:-20px;
+    z-index:15000;
+    pointer-events:none;
+    animation:fall linear forwards;
 }
 
-@keyframes giftPop{
+@keyframes fall{
     to{
-        transform:
-            scale(1.25)
-            rotate(5deg);
-    }
-}
-
-.tag{
-    background:
-        rgba(255,255,255,.14);
-
-    border:
-        1px solid
-        rgba(255,255,255,.15);
-
-    padding:6px 14px;
-
-    border-radius:50px;
-
-    font-size:.8rem;
-
-    font-weight:700;
-
-    margin:4px;
-
-    display:inline-block;
-}
-
-/* =========================
-   FIRST PAGE SURPRISE
-========================= */
-
-.surpriseText{
-    font-family:'Caveat',cursive;
-
-    font-size:1.45rem;
-
-    color:#ffdce5;
-
-    margin-top:8px;
-
-    animation:
-        surprisePulse 2s infinite;
-}
-
-@keyframes surprisePulse{
-    0%,100%{
-        opacity:.7;
-    }
-
-    50%{
-        opacity:1;
-        transform:scale(1.03);
+        transform:translateY(110vh) rotate(720deg);
+        opacity:0;
     }
 }
 
@@ -894,52 +700,90 @@ h2{
    MOBILE
 ========================= */
 
-@media(max-width:500px){
+@media(max-width:700px){
 
-    .lockerCard{
-        padding:32px 20px;
-        border-radius:32px;
+    .locker-box{
+        padding:30px 18px;
+        border-radius:25px;
     }
 
-    .lockerTitle{
-        font-size:3rem;
+    .locker-box h1{
+        font-size:42px;
     }
 
-    .lockIcon{
-        width:90px;
-        height:90px;
-        font-size:45px;
+    .password-row{
+        gap:5px;
     }
 
     .passInput{
-        width:39px;
-        height:50px;
+        width:42px;
+        height:52px;
+        font-size:21px;
     }
 
-    h1{
-        font-size:3.3rem;
+    .page{
+        padding:78px 12px 90px;
     }
 
     .card{
-        padding:25px 20px;
-        max-height:88vh;
-        overflow-y:auto;
+        padding:28px 18px;
+        border-radius:25px;
     }
 
-    .photoBox{
-        width:170px;
-        height:170px;
+    .card h1{
+        font-size:52px;
     }
 
-    .thought{
-        font-size:1.25rem;
+    .card h2{
+        font-size:45px;
     }
 
-    .topBar{
-        top:10px;
+    .card p{
+        font-size:14px;
+        line-height:1.8;
+    }
+
+    .photo{
+        width:min(290px,95%);
+    }
+
+    .photo-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .memory-list{
+        grid-template-columns:1fr;
+    }
+
+    .brand{
+        font-size:25px;
+    }
+
+    .nav{
+        bottom:16px;
     }
 }
 
+@media(max-width:400px){
+
+    .passInput{
+        width:38px;
+        height:48px;
+    }
+
+    .card h1{
+        font-size:46px;
+    }
+
+    .card h2{
+        font-size:40px;
+    }
+
+    .nav-btn{
+        width:42px;
+        height:42px;
+    }
+}
 </style>
 </head>
 
@@ -949,532 +793,485 @@ h2{
      BACKGROUND
 ========================= -->
 
-<div class="orb o1"></div>
-<div class="orb o2"></div>
-<div class="orb o3"></div>
+<div class="bg">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
+</div>
+
+<div class="cursor" id="cursor"></div>
+
 
 <!-- =========================
-     LOCKER SCREEN
+     LOCKER
 ========================= -->
 
-<div id="locker">
+<section id="locker">
 
-    <div class="lockerParticles" id="lockerParticles"></div>
+    <div class="locker-box" id="lockerBox">
 
-    <div class="lockerCard" id="lockerCard">
+        <div class="lock-icon">🔐</div>
 
-        <div class="lockerSmall">
-            A Little Surprise
-        </div>
+        <h1>A Little Surprise</h1>
 
-        <div class="lockerTitle">
-            For Varsha ❤️
-        </div>
+        <p>
+            There is something special waiting inside.<br>
+            Enter the secret code to unlock it ✨
+        </p>
 
-        <div class="lockIcon" id="lockIcon">
-            🔐
-        </div>
+        <div class="password-row">
 
-        <div class="lockerMessage">
-            Something special is locked inside...<br>
-            Only one person knows the key. ✨
-        </div>
-
-        <div class="passwordBox">
+            <!-- IMPORTANT:
+                 These IDs are pass1-pass6.
+                 They are NOT p1-p6 because the pages also have IDs.
+            -->
 
             <input
                 class="passInput"
+                id="pass1"
+                type="password"
                 maxlength="1"
                 inputmode="numeric"
-                type="password"
-                id="p1"
-                oninput="nextInput(this,'p2')"
+                autocomplete="off"
+                oninput="nextInput(this,'pass2')"
             >
 
             <input
                 class="passInput"
+                id="pass2"
+                type="password"
                 maxlength="1"
                 inputmode="numeric"
-                type="password"
-                id="p2"
-                oninput="nextInput(this,'p3')"
+                autocomplete="off"
+                oninput="nextInput(this,'pass3')"
             >
 
             <input
                 class="passInput"
+                id="pass3"
+                type="password"
                 maxlength="1"
                 inputmode="numeric"
-                type="password"
-                id="p3"
-                oninput="nextInput(this,'p4')"
+                autocomplete="off"
+                oninput="nextInput(this,'pass4')"
             >
 
             <input
                 class="passInput"
+                id="pass4"
+                type="password"
                 maxlength="1"
                 inputmode="numeric"
-                type="password"
-                id="p4"
-                oninput="nextInput(this,'p5')"
+                autocomplete="off"
+                oninput="nextInput(this,'pass5')"
             >
 
             <input
                 class="passInput"
+                id="pass5"
+                type="password"
                 maxlength="1"
                 inputmode="numeric"
-                type="password"
-                id="p5"
-                oninput="nextInput(this,'p6')"
+                autocomplete="off"
+                oninput="nextInput(this,'pass6')"
             >
 
             <input
                 class="passInput"
+                id="pass6"
+                type="password"
                 maxlength="1"
                 inputmode="numeric"
-                type="password"
-                id="p6"
+                autocomplete="off"
                 oninput="checkAuto()"
             >
 
         </div>
 
-        <div class="error" id="error"></div>
-
-        <button class="unlockBtn" onclick="unlockLocker()">
-            🔓 Unlock My Surprise
+        <button class="unlock-btn" onclick="unlockLocker()">
+            Unlock Surprise ✨
         </button>
 
-        <div class="hint">
-            Six digits • A special date ✨
-        </div>
+        <div id="wrong"></div>
 
     </div>
 
-</div>
+</section>
 
 
 <!-- =========================
      MAIN WEBSITE
 ========================= -->
 
-<div class="progress" id="bar"></div>
+<div id="mainUI">
 
-<div class="dots" id="dots"></div>
-
-<div class="topBar">
-
-    <div
-        class="iconBtn"
-        onclick="go((cur-1+total)%total)"
-    >
-        ←
+    <div class="progress-wrap">
+        <div id="progress"></div>
     </div>
 
-    <div
-        class="iconBtn"
-        id="musicBtn"
-        onclick="toggleMusic()"
-    >
-        🎵
-    </div>
-
-</div>
-
-<div class="cursor" id="cursor">
-    💖
-</div>
-
-
-<!-- =========================
-     PAGE 1
-========================= -->
-
-<div class="page active" id="p0">
-
-<div class="card">
-
-    <h2>
-        A Surprise Is Waiting
-    </h2>
-
-    <h1>
-        Happy Birthday!
-    </h1>
-
-    <div class="surpriseText">
-        You found the secret... now the real surprise begins ✨
-    </div>
-
-    <div
-        class="photoBox"
-        id="tilt0"
-    >
-        <img src="photo1.jpg">
-    </div>
-
-    <p class="thought">
-
-        Varsha, this isn't just another birthday wish.
-        I wanted to create something that would make you
-        smile while going through it. ❤️
-
-        <br><br>
-
-        So here's your little birthday surprise —
-        seven pages, seven memories, and a lot of
-        good wishes packed into one tiny corner of
-        the internet.
-
-        <br><br>
-
-        May this year bring you happiness,
-        peace, beautiful memories and countless
-        reasons to smile.
-
-        ✨ Happy Birthday, Varsha! ✨
-
-    </p>
-
-    <button
-        class="btn"
-        onclick="go(1)"
-    >
-        Open The Surprise → 
-    </button>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-     PAGE 2
-========================= -->
-
-<div class="page" id="p1">
-
-<div class="card">
-
-    <h2>
-        02 • CUTENESS
-    </h2>
-
-    <h1>
-        Cutest Soul ✨
-    </h1>
-
-    <div class="photoBox">
-        <img src="photo2.jpg">
-    </div>
-
-    <p class="thought">
-
-        Niv yaka ishtu cute agi edhira? 😂
-        No filter, no effort — your pout,
-        your angry face, your sleepy texts,
-        everything is cute.
-
-        If cuteness had a face,
-        it would be you, Varsha.
-
-        Please never change!
-
-    </p>
-
-    <button
-        class="btn"
-        onclick="go(2)"
-    >
-        Next →
-    </button>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-     PAGE 3
-========================= -->
-
-<div class="page" id="p2">
-
-<div class="card">
-
-    <h2>
-        03 • CARE ❤️
-    </h2>
-
-    <h1>
-        Your Care
-    </h1>
-
-    <div class="photoBox">
-        <img src="photo3.jpg">
-    </div>
-
-    <p class="thought">
-
-        You don't care loudly,
-        you care deeply.
-
-        You notice when I'm low,
-        you remember what I like,
-        you check on me without reason.
-
-        That kind of care is not taught —
-        it's gifted.
-
-        And you are gifted.
-
-    </p>
-
-    <button
-        class="btn"
-        onclick="go(3)"
-    >
-        Next →
-    </button>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-     PAGE 4
-========================= -->
-
-<div class="page" id="p3">
-
-<div class="card">
-
-    <h2>
-        04 • RESPECT, SUPPORT, KINDNESS
-    </h2>
-
-    <h1>
-        Golden Heart 🫶
-    </h1>
-
-    <div class="photoBox">
-        <img src="photo4.jpg">
-    </div>
-
-    <p class="thought">
-
-        <span class="tag">Respect 🫶</span>
-
-        <span class="tag">Support 🤝</span>
-
-        <span class="tag">Kindness 🌸</span>
-
-        <br><br>
-
-        You respect everyone,
-        you support without conditions,
-        and your kindness...
-        it doesn't have an off-button.
-
-        In a world of fake,
-        you are the most real.
-
-        That's why everyone loves you.
-
-    </p>
-
-    <button
-        class="btn"
-        onclick="go(4)"
-    >
-        Next →
-    </button>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-     PAGE 5
-========================= -->
-
-<div class="page" id="p4">
-
-<div class="card">
-
-    <h2>
-        05 • GROWING & SAFE
-    </h2>
-
-    <h1>
-        Safe With You 😊
-    </h1>
-
-    <div class="photoBox">
-        <img src="photo5.jpg">
-    </div>
-
-    <p class="thought">
-
-        With you, I don't need to pretend.
-
-        I can be silly, emotional,
-        or completely useless —
-        and still feel safe.
-
-        Watching you grow,
-        glow and handle life so strongly
-        is inspiring.
-
-        You feel like home, Varsha.
-
-    </p>
-
-    <button
-        class="btn"
-        onclick="go(5)"
-    >
-        Next →
-    </button>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-     PAGE 6
-========================= -->
-
-<div class="page" id="p5">
-
-<div class="card">
-
-    <h2>
-        06 • FORGIVENESS & ACCEPTANCE
-    </h2>
-
-    <h1>
-        Big Heart 🤍
-    </h1>
-
-    <div class="photoBox">
-        <img src="photo6.jpg">
-    </div>
-
-    <p class="thought">
-
-        You forgive even when you shouldn't
-        have to.
-
-        You accept people with all their flaws.
-
-        That takes a heart bigger than the world —
-        and you have it.
-
-        May life be as gentle to you
-        as you are to everyone.
-
-    </p>
-
-    <button
-        class="btn"
-        onclick="go(6)"
-    >
-        Last Page →
-    </button>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-     PAGE 7 FINAL
-========================= -->
-
-<div class="page" id="p6">
-
-<div class="card">
-
-    <h2>
-        07 • LOYALTY • BOND THAT NEVER BREAKS
-    </h2>
-
-    <h1 style="font-size:3.3rem">
-        My Varsha 🔒
-    </h1>
-
-    <div
-        class="gift"
-        onclick="megaBlast()"
-    >
-        🎁
-    </div>
-
-    <div class="photoBox">
-
-        <img src="photo7.jpg">
+    <div class="topbar">
+
+        <div class="brand">
+            For Varsha ✨
+        </div>
+
+        <button class="music-btn" onclick="toggleMusic()" id="musicBtn">
+            🎵
+        </button>
 
     </div>
 
-    <p
-        class="thought"
-        style="font-size:1.25rem"
-    >
 
-        Some people come as friends,
-        but stay as luck.
+    <!-- =========================
+         ALL 7 PAGES
+    ========================= -->
 
-        <br>
+    <div id="pages">
 
-        <b>V</b> — Very few hearts are this pure,
 
-        <br>
+        <!-- PAGE 1 -->
+        <section class="page active" id="page0">
 
-        <b>A</b> — Always my favourite chaos,
+            <div class="card">
 
-        <br>
+                <div class="kicker">
+                    SURPRISE UNLOCKED ✨
+                </div>
 
-        <b>R</b> — Really my bestest friend,
+                <h1>
+                    Happy Birthday
+                </h1>
 
-        <br>
+                <h2>
+                    Varsha ❤️
+                </h2>
 
-        <b>S</b> — Softest place to fall,
+                <div class="divider"></div>
 
-        <br>
+                <p>
+                    This little website is just a small way of wishing you
+                    a beautiful birthday.
+                </p>
 
-        <b>H</b> — Home in human form,
+                <p style="margin-top:15px;">
+                    I hope every page gives you one more reason to smile,
+                    and this new year of your life brings you
+                    <span class="highlight">happiness, peace, success and beautiful memories.</span>
+                </p>
 
-        <br>
+                <p style="margin-top:20px;">
+                    Keep smiling and keep being yourself. ✨
+                </p>
 
-        <b>A</b> — And my forever luck.
+            </div>
 
-        <br><br>
+        </section>
 
-        Varsha, some bonds don't need promises —
-        they are just meant to stay.
 
-        You are my bestest friend,
-        my luck.
+        <!-- PAGE 2 -->
+        <section class="page" id="page1">
 
-        Life is simply better with you in it.
+            <div class="card">
 
-        <br><br>
+                <div class="kicker">
+                    A LITTLE MEMORY
+                </div>
 
-        Happy Birthday! ❤️
+                <h2>
+                    One Picture 📸
+                </h2>
 
-    </p>
+                <img
+                    src="photo1.jpg"
+                    class="photo"
+                    alt="Birthday memory"
+                    onerror="this.style.background='rgba(255,255,255,.08)'"
+                >
 
-    <button
-        class="btn"
-        onclick="go(0)"
-    >
-        Replay From Start ↺
-    </button>
+                <p>
+                    Some pictures become special because of the
+                    memories connected to them.
+                </p>
 
-</div>
+                <p style="margin-top:15px;">
+                    This one is just a small reminder of a good moment
+                    worth remembering. ✨
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- PAGE 3 -->
+        <section class="page" id="page2">
+
+            <div class="card">
+
+                <div class="kicker">
+                    LITTLE MOMENTS
+                </div>
+
+                <h2>
+                    Memories 🌸
+                </h2>
+
+                <div class="photo-grid">
+
+                    <img src="photo2.jpg" alt="Memory 1">
+                    <img src="photo3.jpg" alt="Memory 2">
+                    <img src="photo4.jpg" alt="Memory 3">
+                    <img src="photo5.jpg" alt="Memory 4">
+                    <img src="photo6.jpg" alt="Memory 5">
+                    <img src="photo7.jpg" alt="Memory 6">
+
+                </div>
+
+                <p style="margin-top:25px;">
+                    A few pictures, a few moments,
+                    and a lot of memories. ❤️
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- PAGE 4 -->
+        <section class="page" id="page3">
+
+            <div class="card">
+
+                <div class="kicker">
+                    SOME THINGS ARE SIMPLE
+                </div>
+
+                <h2>
+                    Why You're Special ✨
+                </h2>
+
+                <div class="memory-list">
+
+                    <div class="memory">
+                        <span>🌸</span>
+                        <h3>Your Smile</h3>
+                        <p>
+                            A simple smile can make an ordinary moment
+                            feel a little brighter.
+                        </p>
+                    </div>
+
+                    <div class="memory">
+                        <span>✨</span>
+                        <h3>Your Vibe</h3>
+                        <p>
+                            You have your own way of making moments
+                            memorable.
+                        </p>
+                    </div>
+
+                    <div class="memory">
+                        <span>😂</span>
+                        <h3>The Random Moments</h3>
+                        <p>
+                            Some of the funniest memories are the ones
+                            nobody planned.
+                        </p>
+                    </div>
+
+                    <div class="memory">
+                        <span>🤍</span>
+                        <h3>The Friendship</h3>
+                        <p>
+                            Good friendships are made from small moments,
+                            conversations and memories.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PAGE 5 -->
+        <section class="page" id="page4">
+
+            <div class="card">
+
+                <div class="kicker">
+                    BIRTHDAY WISHES
+                </div>
+
+                <h2>
+                    For Your New Year 🌷
+                </h2>
+
+                <div class="wish-list">
+
+                    <div class="wish">
+                        <p>
+                            🌟 May you achieve the goals you are working for.
+                        </p>
+                    </div>
+
+                    <div class="wish">
+                        <p>
+                            🌸 May you always have reasons to smile.
+                        </p>
+                    </div>
+
+                    <div class="wish">
+                        <p>
+                            🕊️ May this year bring you peace and happiness.
+                        </p>
+                    </div>
+
+                    <div class="wish">
+                        <p>
+                            💫 May every difficult phase become a lesson
+                            that makes you stronger.
+                        </p>
+                    </div>
+
+                    <div class="wish">
+                        <p>
+                            ❤️ And may you always stay surrounded by
+                            people who genuinely care about you.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PAGE 6 -->
+        <section class="page" id="page5">
+
+            <div class="card">
+
+                <div class="kicker">
+                    A SMALL MESSAGE
+                </div>
+
+                <h2>
+                    Keep This Smile 😊
+                </h2>
+
+                <img
+                    src="photo6.jpg"
+                    class="photo"
+                    alt="Birthday photo"
+                >
+
+                <p>
+                    Life changes, people grow, and new chapters begin.
+                    But the good memories we create along the way
+                    always remain special.
+                </p>
+
+                <p style="margin-top:18px;">
+                    So keep smiling, keep learning, keep growing,
+                    and keep making beautiful memories.
+                </p>
+
+                <div class="divider"></div>
+
+                <p>
+                    Happy Birthday once again, Varsha! 🎂✨
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- PAGE 7 -->
+        <section class="page" id="page6">
+
+            <div class="card final-card">
+
+                <div class="big-heart">
+                    ❤️
+                </div>
+
+                <div class="kicker">
+                    THE LAST PAGE
+                </div>
+
+                <h2>
+                    Once Again...
+                </h2>
+
+                <p style="font-size:18px;">
+                    Happy Birthday, Varsha! 🎂
+                </p>
+
+                <div class="divider"></div>
+
+                <p>
+                    I hope you have an amazing year ahead,
+                    filled with happiness, success, good health,
+                    peaceful moments and unforgettable memories.
+                </p>
+
+                <p style="margin-top:20px;">
+                    Thank you for being a memorable part of
+                    these moments. 🌸
+                </p>
+
+                <div class="signature">
+                    Keep smiling ✨
+                </div>
+
+                <p style="margin-top:20px;">
+                    Made with lots of good wishes ❤️
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
+
+    <div class="nav">
+
+        <button
+            class="nav-btn"
+            onclick="previousPage()"
+            aria-label="Previous page">
+            ‹
+        </button>
+
+        <div class="dots">
+
+            <div class="dot active" onclick="go(0)"></div>
+            <div class="dot" onclick="go(1)"></div>
+            <div class="dot" onclick="go(2)"></div>
+            <div class="dot" onclick="go(3)"></div>
+            <div class="dot" onclick="go(4)"></div>
+            <div class="dot" onclick="go(5)"></div>
+            <div class="dot" onclick="go(6)"></div>
+
+        </div>
+
+        <button
+            class="nav-btn"
+            onclick="nextPage()"
+            aria-label="Next page">
+            ›
+        </button>
+
+    </div>
 
 </div>
 
@@ -1486,700 +1283,433 @@ h2{
 <audio
     id="music"
     loop
-    preload="auto"
->
-
+    preload="auto">
     <source
-        src="https://cdn.pixabay.com/audio/2022/10/30/audio_8c0f7e4c7b.mp3"
-        type="audio/mpeg"
-    >
-
+        src="https://cdn.pixabay.com/audio/2022/10/25/audio_9468f9e4c1.mp3"
+        type="audio/mpeg">
 </audio>
 
 
 <script>
 
-/* =====================================================
-   LOCKER
-===================================================== */
+/* ==========================================
+   GLOBAL VARIABLES
+========================================== */
 
-const CORRECT_PASSWORD = "081006";
+let currentPage = 0;
+let unlocked = false;
+
+const PASSWORD = "081006";
 
 const locker = document.getElementById("locker");
-const lockerCard = document.getElementById("lockerCard");
-const lockIcon = document.getElementById("lockIcon");
-const errorText = document.getElementById("error");
+const lockerBox = document.getElementById("lockerBox");
+const mainUI = document.getElementById("mainUI");
+const music = document.getElementById("music");
 
-function nextInput(current,nextId){
+const pages = document.querySelectorAll(".page");
+const dots = document.querySelectorAll(".dot");
 
-    if(current.value.length >= 1){
+const progress = document.getElementById("progress");
+const wrong = document.getElementById("wrong");
 
-        document.getElementById(nextId).focus();
 
+/* ==========================================
+   PASSWORD INPUT
+========================================== */
+
+function nextInput(current, nextId){
+
+    if(current.value.length > 1){
+        current.value = current.value.slice(0,1);
     }
 
-}
+    if(current.value !== ""){
+        const next = document.getElementById(nextId);
 
-function getPassword(){
-
-    let password = "";
-
-    for(let i=1;i<=6;i++){
-
-        password += document.getElementById("p"+i).value;
-
+        if(next){
+            next.focus();
+        }
     }
 
-    return password;
-
+    checkAuto();
 }
+
 
 function checkAuto(){
 
-    if(getPassword().length === 6){
+    let code = "";
 
-        unlockLocker();
-
+    for(let i = 1; i <= 6; i++){
+        code += document.getElementById("pass" + i).value;
     }
 
-}
-
-function unlockLocker(){
-
-    const entered = getPassword();
-
-    if(entered !== CORRECT_PASSWORD){
-
-        errorText.innerText =
-            "That key didn't work... try again ❤️";
-
-        lockerCard.classList.remove("shake");
-
-        void lockerCard.offsetWidth;
-
-        lockerCard.classList.add("shake");
-
-        lockIcon.innerText = "🔒";
-
-        return;
-
+    if(code.length === 6){
+        setTimeout(unlockLocker,150);
     }
-
-    errorText.innerText = "";
-
-    lockIcon.innerText = "🔓";
-
-    lockerCard.style.transform =
-        "scale(1.08)";
-
-    megaLockerBlast();
-
-    setTimeout(()=>{
-
-        locker.classList.add("hide");
-
-        document.body.style.overflow = "hidden";
-
-        setTimeout(()=>{
-
-            locker.style.display = "none";
-
-            startWebsite();
-
-        },900);
-
-    },800);
-
 }
 
 
-/* =====================================================
-   LOCKER PARTICLES
-===================================================== */
+/* ==========================================
+   PASSWORD BACKSPACE
+========================================== */
 
-const particleContainer =
-    document.getElementById("lockerParticles");
+document.querySelectorAll(".passInput").forEach((input,index)=>{
 
-const particleSymbols = [
-    "✨",
-    "💖",
-    "🌸",
-    "💫",
-    "💕",
-    "⭐",
-    "🦋"
-];
+    input.addEventListener("keydown",(e)=>{
 
-for(let i=0;i<28;i++){
+        if(e.key === "Backspace" && input.value === ""){
 
-    const particle =
-        document.createElement("div");
-
-    particle.className =
-        "lockerParticle";
-
-    particle.innerText =
-        particleSymbols[
-            Math.floor(
-                Math.random()*particleSymbols.length
-            )
-        ];
-
-    particle.style.left =
-        Math.random()*100 + "%";
-
-    particle.style.animationDuration =
-        7 + Math.random()*10 + "s";
-
-    particle.style.animationDelay =
-        Math.random()*8 + "s";
-
-    particle.style.fontSize =
-        12 + Math.random()*16 + "px";
-
-    particleContainer.appendChild(particle);
-
-}
-
-
-/* =====================================================
-   LOCKER CONFETTI
-===================================================== */
-
-function megaLockerBlast(){
-
-    confetti({
-        particleCount:180,
-        spread:150,
-        origin:{
-            y:.55
-        },
-
-        colors:[
-            "#ff4d6d",
-            "#fda4af",
-            "#a78bfa",
-            "#ffd700",
-            "#ffffff"
-        ]
-    });
-
-    let end =
-        Date.now()+1800;
-
-    function frame(){
-
-        confetti({
-            particleCount:5,
-            angle:60,
-            spread:70,
-            origin:{
-                x:0
-            },
-
-            colors:[
-                "#ff4d6d",
-                "#ffd700",
-                "#a78bfa"
-            ]
-        });
-
-        confetti({
-            particleCount:5,
-            angle:120,
-            spread:70,
-            origin:{
-                x:1
-            },
-
-            colors:[
-                "#ff4d6d",
-                "#ffffff",
-                "#fb7185"
-            ]
-        });
-
-        if(Date.now()<end){
-
-            requestAnimationFrame(frame);
+            if(index > 0){
+                document
+                    .getElementById("pass" + index)
+                    .focus();
+            }
 
         }
 
+        if(e.key === "Enter"){
+            unlockLocker();
+        }
+
+    });
+
+});
+
+
+/* ==========================================
+   PASTE PASSWORD
+========================================== */
+
+document.querySelector(".password-row").addEventListener("paste",(e)=>{
+
+    const text = e.clipboardData
+        .getData("text")
+        .replace(/\D/g,"")
+        .slice(0,6);
+
+    if(!text) return;
+
+    e.preventDefault();
+
+    for(let i=0;i<text.length;i++){
+
+        document.getElementById(
+            "pass" + (i+1)
+        ).value = text[i];
+
     }
 
-    frame();
+    if(text.length === 6){
+        setTimeout(unlockLocker,150);
+    }
 
-}
-
-
-/* =====================================================
-   MAIN WEBSITE
-===================================================== */
-
-let cur = 0;
-let total = 7;
-let isPlaying = false;
-
-const music =
-    document.getElementById("music");
-
-music.volume = 0.22;
+});
 
 
-/* =====================================================
-   START WEBSITE AFTER LOCKER
-===================================================== */
+/* ==========================================
+   UNLOCK
+========================================== */
 
-function startWebsite(){
+function unlockLocker(){
 
-    document
-        .getElementById("bar")
-        .style.width =
-        (1/total*100)+"%";
+    let code = "";
+
+    for(let i = 1; i <= 6; i++){
+        code += document.getElementById("pass" + i).value;
+    }
+
+    if(code !== PASSWORD){
+
+        wrong.textContent = "That's not the secret code ✨";
+
+        lockerBox.classList.remove("shake");
+
+        void lockerBox.offsetWidth;
+
+        lockerBox.classList.add("shake");
+
+        return;
+    }
+
+    unlocked = true;
+
+    wrong.textContent = "";
+
+    createConfetti();
+
+    /* Make main website available */
+    mainUI.classList.add("ready");
+
+    /* Always start from Page 1 */
+    showPage(0);
+
+    /* Hide locker */
+    locker.classList.add("hide");
+
+    /* Start music after user interaction */
+    music.volume = 0.35;
 
     music.play()
         .then(()=>{
-
-            isPlaying = true;
-
-            document
-                .getElementById("musicBtn")
-                .innerText = "🎵";
-
+            document.getElementById("musicBtn").textContent = "🎵";
         })
         .catch(()=>{
-
-            isPlaying = false;
-
+            document.getElementById("musicBtn").textContent = "🔇";
         });
 
     setTimeout(()=>{
-
-        confetti({
-            particleCount:100,
-            spread:100,
-            origin:{
-                y:.65
-            }
-        });
-
-    },500);
+        locker.style.display = "none";
+    },900);
 
 }
 
 
-/* =====================================================
+/* ==========================================
+   PAGE SWITCHING
+========================================== */
+
+function showPage(number){
+
+    if(!unlocked && number !== 0){
+        return;
+    }
+
+    currentPage = Math.max(
+        0,
+        Math.min(number,pages.length - 1)
+    );
+
+    pages.forEach((page,index)=>{
+
+        page.classList.toggle(
+            "active",
+            index === currentPage
+        );
+
+        /* Reset scroll position whenever a page opens */
+        if(index === currentPage){
+            page.scrollTop = 0;
+        }
+
+    });
+
+
+    dots.forEach((dot,index)=>{
+
+        dot.classList.toggle(
+            "active",
+            index === currentPage
+        );
+
+    });
+
+
+    const percentage =
+        ((currentPage + 1) / pages.length) * 100;
+
+    progress.style.width = percentage + "%";
+
+}
+
+
+function go(number){
+
+    if(!unlocked) return;
+
+    showPage(number);
+
+}
+
+
+function nextPage(){
+
+    if(!unlocked) return;
+
+    if(currentPage < pages.length - 1){
+        showPage(currentPage + 1);
+    }else{
+        showPage(0);
+    }
+
+}
+
+
+function previousPage(){
+
+    if(!unlocked) return;
+
+    if(currentPage > 0){
+        showPage(currentPage - 1);
+    }else{
+        showPage(pages.length - 1);
+    }
+
+}
+
+
+/* ==========================================
+   KEYBOARD NAVIGATION
+========================================== */
+
+document.addEventListener("keydown",(e)=>{
+
+    if(!unlocked) return;
+
+    /* Don't navigate when typing in password */
+    if(
+        document.activeElement &&
+        document.activeElement.classList.contains("passInput")
+    ){
+        return;
+    }
+
+    if(e.key === "ArrowRight"){
+        nextPage();
+    }
+
+    if(e.key === "ArrowLeft"){
+        previousPage();
+    }
+
+});
+
+
+/* ==========================================
    MUSIC
-===================================================== */
+========================================== */
 
 function toggleMusic(){
 
-    isPlaying = !isPlaying;
+    if(music.paused){
 
-    if(isPlaying){
-
-        music.play();
+        music.play()
+            .then(()=>{
+                document.getElementById("musicBtn").textContent = "🎵";
+            })
+            .catch(()=>{
+                document.getElementById("musicBtn").textContent = "🔇";
+            });
 
     }else{
 
         music.pause();
 
-    }
-
-    document
-        .getElementById("musicBtn")
-        .innerText =
-        isPlaying ? "🎵" : "🔇";
-
-}
-
-
-/* =====================================================
-   PAGE NAVIGATION
-===================================================== */
-
-function go(n){
-
-    cur =
-        (n+total)%total;
-
-    document
-        .querySelectorAll(".page")
-        .forEach(p =>
-            p.classList.remove("active")
-        );
-
-    document
-        .getElementById("p"+cur)
-        .classList.add("active");
-
-    document
-        .getElementById("bar")
-        .style.width =
-        ((cur+1)/total*100)+"%";
-
-    document
-        .querySelectorAll(".dot")
-        .forEach((d,i)=>{
-
-            d.className =
-                i==cur
-                ? "dot on"
-                : "dot";
-
-        });
-
-
-    if(!isPlaying){
-
-        music.play()
-            .then(()=>{
-
-                isPlaying = true;
-
-            })
-            .catch(()=>{});
-
-        document
-            .getElementById("musicBtn")
-            .innerText = "🎵";
-
-    }
-
-
-    confetti({
-        particleCount:90,
-        spread:100,
-        origin:{
-            y:.7
-        },
-
-        colors:[
-            "#ff4d6d",
-            "#fda4af",
-            "#a78bfa"
-        ]
-
-    });
-
-
-    if(cur==6){
-
-        megaBlast();
+        document.getElementById("musicBtn").textContent = "🔇";
 
     }
 
 }
 
 
-/* =====================================================
-   DOTS
-===================================================== */
-
-for(let i=0;i<total;i++){
-
-    let d =
-        document.createElement("div");
-
-    d.className =
-        i==0
-        ? "dot on"
-        : "dot";
-
-    d.onclick =
-        ()=>go(i);
-
-    document
-        .getElementById("dots")
-        .appendChild(d);
-
-}
-
-
-/* =====================================================
-   FINAL PAGE BLAST
-===================================================== */
-
-function megaBlast(){
-
-    let end =
-        Date.now()+4000;
-
-    (function frame(){
-
-        confetti({
-            particleCount:7,
-            angle:60,
-            spread:80,
-            origin:{
-                x:0
-            },
-
-            colors:[
-                "#ff4d6d",
-                "#ffd700",
-                "#a78bfa"
-            ]
-
-        });
-
-        confetti({
-            particleCount:7,
-            angle:120,
-            spread:80,
-            origin:{
-                x:1
-            },
-
-            colors:[
-                "#ff4d6d",
-                "#fff",
-                "#fb7185"
-            ]
-
-        });
-
-        if(Date.now()<end){
-
-            requestAnimationFrame(frame);
-
-        }
-
-    })();
-
-
-    confetti({
-        particleCount:200,
-        spread:160,
-        origin:{
-            y:.6
-        },
-
-        startVelocity:45
-
-    });
-
-}
-
-
-/* =====================================================
+/* ==========================================
    CURSOR
-===================================================== */
+========================================== */
 
-const cursor =
-    document.getElementById("cursor");
+const cursor = document.getElementById("cursor");
 
-let mouseX=0;
-let mouseY=0;
-let cx=0;
-let cy=0;
+document.addEventListener("mousemove",(e)=>{
 
-document.addEventListener(
-    "mousemove",
-    e=>{
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
 
-        mouseX=e.clientX;
-        mouseY=e.clientY;
-
-        let t =
-            document.createElement("div");
-
-        t.className =
-            "trail";
-
-        t.innerText =
-            [
-                "💖",
-                "✨",
-                "🌸",
-                "💫"
-            ][
-                Math.floor(
-                    Math.random()*4
-                )
-            ];
-
-        t.style.left =
-            e.clientX+"px";
-
-        t.style.top =
-            e.clientY+"px";
-
-        t.style.fontSize =
-            14+Math.random()*12+"px";
-
-        document
-            .body
-            .appendChild(t);
-
-        setTimeout(
-            ()=>t.remove(),
-            1200
-        );
-
-    }
-);
+});
 
 
-(function loop(){
+/* ==========================================
+   FLOATING HEARTS
+========================================== */
 
-    cx +=
-        (mouseX-cx)*.15;
+function createHeart(){
 
-    cy +=
-        (mouseY-cy)*.15;
+    if(!unlocked) return;
 
-    cursor.style.left =
-        cx+"px";
+    const heart = document.createElement("div");
 
-    cursor.style.top =
-        cy+"px";
+    heart.className = "heart";
 
-    requestAnimationFrame(loop);
+    const symbols = ["❤️","💗","💕","✨","🌸","💖"];
 
-})();
+    heart.textContent =
+        symbols[Math.floor(Math.random()*symbols.length)];
+
+    heart.style.left =
+        Math.random()*100 + "vw";
+
+    heart.style.fontSize =
+        (12 + Math.random()*18) + "px";
+
+    heart.style.animationDuration =
+        (5 + Math.random()*5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },10000);
+
+}
+
+setInterval(createHeart,900);
 
 
-/* =====================================================
-   TOUCH EFFECT
-===================================================== */
+/* ==========================================
+   CONFETTI
+========================================== */
 
-document.addEventListener(
-    "touchmove",
-    e=>{
+function createConfetti(){
 
-        let tt =
-            e.touches[0];
+    const symbols = [
+        "🎉",
+        "✨",
+        "💖",
+        "🌸",
+        "⭐",
+        "🎀"
+    ];
 
-        let tr =
-            document.createElement("div");
+    for(let i=0;i<90;i++){
 
-        tr.className =
-            "trail";
+        const piece = document.createElement("div");
 
-        tr.innerText =
-            "💖";
+        piece.className = "confetti";
 
-        tr.style.left =
-            tt.clientX+"px";
+        piece.textContent =
+            symbols[Math.floor(Math.random()*symbols.length)];
 
-        tr.style.top =
-            tt.clientY+"px";
+        piece.style.left =
+            Math.random()*100 + "vw";
 
-        document
-            .body
-            .appendChild(tr);
+        piece.style.fontSize =
+            (10 + Math.random()*15) + "px";
 
-        setTimeout(
-            ()=>tr.remove(),
-            1000
-        );
+        piece.style.animationDuration =
+            (2 + Math.random()*3) + "s";
+
+        piece.style.animationDelay =
+            Math.random()*.8 + "s";
+
+        document.body.appendChild(piece);
+
+        setTimeout(()=>{
+            piece.remove();
+        },5000);
 
     }
-);
+
+}
 
 
-/* =====================================================
-   PHOTO 3D EFFECT
-===================================================== */
+/* ==========================================
+   INITIAL STATE
+========================================== */
 
-document
-    .querySelectorAll(".photoBox")
-    .forEach(box=>{
+/*
+   Page 1 is selected internally,
+   but the entire website stays locked
+   until the correct password is entered.
+*/
 
-        box.addEventListener(
-            "mousemove",
-            e=>{
-
-                let r =
-                    box.getBoundingClientRect();
-
-                let x =
-                    e.clientX-r.left-r.width/2;
-
-                let y =
-                    e.clientY-r.top-r.height/2;
-
-                box.style.transform =
-                    `perspective(600px)
-                     rotateY(${x/10}deg)
-                     rotateX(${-y/10}deg)
-                     scale(1.08)`;
-
-            }
-        );
-
-
-        box.addEventListener(
-            "mouseleave",
-            ()=>{
-
-                box.style.transform =
-                    "perspective(600px) rotateY(0) rotateX(0) scale(1)";
-
-            }
-        );
-
-    });
-
-
-/* =====================================================
-   ENTER KEY SUPPORT
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    e=>{
-
-        if(e.key==="Enter"){
-
-            const lockerVisible =
-                document
-                    .getElementById("locker")
-                    .style.display !== "none";
-
-            if(lockerVisible){
-
-                unlockLocker();
-
-            }
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   BACKSPACE BETWEEN PASSWORD BOXES
-===================================================== */
-
-document
-    .querySelectorAll(".passInput")
-    .forEach((input,index)=>{
-
-        input.addEventListener(
-            "keydown",
-            e=>{
-
-                if(
-                    e.key==="Backspace" &&
-                    input.value==="" &&
-                    index>0
-                ){
-
-                    document
-                        .getElementById(
-                            "p"+index
-                        )
-                        .focus();
-
-                }
-
-            }
-        );
-
-    });
+showPage(0);
 
 </script>
 
